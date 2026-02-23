@@ -3,292 +3,142 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jassel Sabit | Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Student & Subjects</title>
 
-  <!-- Optional (Module 4 - Hello World alert in head) -->
-  <!-- You can enable this if your instructor requires the alert exercise -->
-  <!--
-  <script>
-    alert("Hello World! I am an alert box.");
-  </script>
-  -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    h2 {
+      margin-top: 30px;
+    }
+
+    .search-input {
+      width: 100%;
+      max-width: 600px;
+      padding: 10px;
+      margin: 10px 0 15px;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid #888;
+      padding: 8px;
+      text-align: left;
+    }
+
+    thead {
+      background-color: #f2f2f2;
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="header-container">
-    <div class="logo">
-      <h1>Jassel Sabit</h1>
-    </div>
-
-    <nav>
-      <ul class="nav-menu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<main class="container">
-
-  <!-- ABOUT -->
-  <section id="about">
-    <h2>About Me</h2>
-
-    <figure>
-      <img src="resume.jpg" alt="Portrait of Jassel Sabit">
-      <figcaption>Jassel Sabit – Information Technology Student</figcaption>
-    </figure>
-
-    <p>
-      I am a motivated Information Technology student seeking opportunities to apply my skills and
-      gain experience in a professional environment. I enjoy building responsive websites and
-      continuously improving my technical and problem-solving abilities.
-    </p>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education">
-    <h2>Education</h2>
-
-    <ol>
-      <li>
-        <h3>Capitol University</h3>
-        <p>STEM Strand (2021 – 2023)</p>
-      </li>
-
-      <li>
-        <h3>University of Science and Technology of Southern Philippines</h3>
-        <p>BS in Information Technology (2025 – 2026)</p>
-      </li>
-    </ol>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <h2>Skills</h2>
-
-    <ul class="skills-list">
-      <li>Microsoft Office & Google Suite</li>
-      <li>Basic HTML5 & CSS3</li>
-      <li>Time Management</li>
-      <li>Adaptability and Willingness to Learn</li>
-    </ul>
-
-    <p class="note">This text uses <span class="em-text">relative em sizing</span>.</p>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="subjects">
-  <h2>Subjects Taken</h2>
-
-  <!-- Search bar (Skills Challenge) -->
-  <input
-    type="text"
-    id="course-search"
-    placeholder="Search by code or description..."
-    aria-label="Search courses"
-  >
-
-  <table id="courses-table">
-    <thead>
-      <tr>
-        <th>Year Level</th>
-        <th>Semester</th>
-        <th>Code</th>
-        <th>Description</th>
-        <th>Credit</th>
-      </tr>
-    </thead>
-    <tbody id="courses-body"></tbody>
-  </table>
-</section> 
-  
-  <section id="projects">
-    <h2>Projects</h2>
-
-    <div class="project-container">
-      <article class="card">
-        <h3>Portfolio Website</h3>
-        <p>Built using semantic HTML5 and styled with advanced CSS layout techniques.</p>
-      </article>
-
-      <article class="card">
-        <h3>Responsive Layout Design</h3>
-        <p>Created responsive web layouts using Flexbox and proper box model principles.</p>
-      </article>
-
-      <article class="card">
-        <h3>Contact Form Design</h3>
-        <p>Designed and styled a functional contact form with validation and hover effects.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ✅ MODULE 4: Working with JSON file (Student List placeholder) -->
-  <!-- Required by the exercise on page 28 -->
+  <!-- STUDENT LIST -->
   <section id="students">
     <h2>Student List</h2>
-    <ul id="student-list" class="card-body"></ul>
+    <ul id="student-list"></ul>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <h2>Contact</h2>
+  <!-- SUBJECTS TAKEN -->
+  <section id="subjects">
+    <h2>Subjects Taken</h2>
 
-    <form>
-      <label for="name">Name</label>
-      <input type="text" id="name" required>
+    <input
+      type="text"
+      id="course-search"
+      class="search-input"
+      placeholder="Search subject (e.g., programming, discrete, web system)..."
+    >
 
-      <label for="email">Email</label>
-      <input type="email" id="email" required>
-
-      <label for="message">Message</label>
-      <textarea id="message" rows="5" required></textarea>
-
-      <button type="submit">Send</button>
-    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Sem</th>
+          <th>Code</th>
+          <th>Description</th>
+          <th>Credit</th>
+        </tr>
+      </thead>
+      <tbody id="courses-body"></tbody>
+    </table>
   </section>
 
-</main>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
-<footer>
-  <p>© 2026 Jassel Sabit</p>
-</footer>
-
-<!-- ========================= -->
-<!-- JAVASCRIPT SECTION BELOW -->
-<!-- ========================= -->
-<script defer>
-  document.addEventListener("DOMContentLoaded", () => {
-
-    // Selecting by ID
-    const aboutSection = document.getElementById("about");
-    console.log("About Section:", aboutSection);
-
-    // Selecting first h2
-    const firstHeading = document.querySelector("h2");
-    console.log("First h2:", firstHeading);
-
-    // Selecting by class
-    const skillsList = document.querySelector(".skills-list");
-    console.log("Skills List:", skillsList);
-
-    // Selecting multiple elements
-    const projectCards = document.querySelectorAll(".card");
-    console.log("Project Cards:", projectCards);
-
-    // ===== Visual Proof (DOM Manipulation) =====
-    const aboutTitle = document.querySelector("#about h2");
-    if (aboutTitle) aboutTitle.style.color = "blue";
-
-    projectCards.forEach(card => {
-      card.style.border = "2px solid red";
-      card.style.padding = "10px";
-    });
-
-    const footerText = document.querySelector("footer p");
-    if (footerText) {
-      footerText.textContent = "© 2026 Jassel Sabit | Updated with JavaScript";
-    }
-
-// ===== JSON: Students =====
-const jsonURL = "https://sabitjassel.github.io/sabit/students.json";
-
-fetch(jsonURL)
-  .then(response => {
-    if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText}`);
-    return response.json();
-  })
-  .then(data => {
-    const studentList = document.getElementById("student-list");
-    if (!studentList) {
-      console.warn("Missing element: #student-list (add <ul id='student-list'></ul> in HTML)");
-      return;
-    }
-
-    studentList.innerHTML = "";
-
-    // Expect: { "students": [ ... ] }
-    const studentsArray = Array.isArray(data.students) ? data.students : null;
-
-    if (!studentsArray) {
-      console.error("Your students.json must contain { students: [ ... ] }. Got:", data);
-      return;
-    }
-
-    studentsArray.forEach(student => {
-      const li = document.createElement("li");
-      li.textContent = `${student.name ?? "No name"} - ${student.age ?? "?"} (Course: ${student.course ?? "?"})`;
-      studentList.appendChild(li);
-    });
-  })
-  .catch(error => console.error("Error fetching students.json:", error));
-
-    // ===== JSON: Courses + Search =====
-    const coursesURL = "https://sabitjassel.github.io/sabit/courses.json"; // ✅ FIXED
-    let allCourses = [];
-
-    function renderCourses(courses) {
-      const tbody = document.getElementById("courses-body");
-      if (!tbody) {
-        console.warn("Missing element: #courses-body (add <tbody id='courses-body'></tbody> in HTML)");
-        return;
+  // ===== STUDENTS =====
+  fetch("https://sabitjassel.github.io/sabit/students.json")
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById("student-list");
+      if (data.students) {
+        data.students.forEach(student => {
+          const li = document.createElement("li");
+          li.textContent = `${student.name} - ${student.age} (Course: ${student.course})`;
+          list.appendChild(li);
+        });
       }
+    });
 
-      tbody.innerHTML = "";
+  // ===== COURSES =====
+  let allCourses = [];
 
-      courses.forEach(course => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${course.year_level ?? ""}</td>
-          <td>${course.sem ?? ""}</td>
-          <td>${course.code ?? ""}</td>
-          <td>${course.description ?? ""}</td>
-          <td>${course.credit ?? ""}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
+  function renderCourses(courses) {
+    const tbody = document.getElementById("courses-body");
+    tbody.innerHTML = "";
 
-    fetch(coursesURL)
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP ${res.status} - ${res.statusText}`);
-        return res.json();
-      })
-      .then(data => {
-        if (data.courses && Array.isArray(data.courses)) {
-          allCourses = data.courses;
-          renderCourses(allCourses);
-          console.log("Courses loaded:", allCourses.length);
-        } else {
-          console.error("Expected { courses: [ ... ] } but got:", data);
-        }
-      })
-      .catch(err => console.error("Error fetching courses.json:", err));
+    courses.forEach(course => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${course.year_level}</td>
+        <td>${course.sem}</td>
+        <td>${course.code}</td>
+        <td>${course.description}</td>
+        <td>${course.credit}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
 
-    // Search bar filtering
-    const searchInput = document.getElementById("course-search");
-    if (searchInput) {
-      searchInput.addEventListener("input", () => {
-        const q = searchInput.value.trim().toLowerCase();
-        const filtered = allCourses.filter(c =>
-          String(c.code || "").toLowerCase().includes(q) ||
-          String(c.description || "").toLowerCase().includes(q)
-        );
-        renderCourses(filtered);
-      });
-    } else {
-      console.warn("Missing element: #course-search (add <input id='course-search'> in HTML)");
-    }
+  fetch("https://sabitjassel.github.io/sabit/courses.json")
+    .then(res => res.json())
+    .then(data => {
+      if (data.courses) {
+        allCourses = data.courses;
+        renderCourses(allCourses);
+      }
+    });
 
-  });
+  // ===== SEARCH =====
+  document.getElementById("course-search")
+    .addEventListener("input", function () {
+      const query = this.value.toLowerCase();
+
+      const filtered = allCourses.filter(course =>
+        course.code.toLowerCase().includes(query) ||
+        course.description.toLowerCase().includes(query)
+      );
+
+      renderCourses(filtered);
+    });
+
+});
 </script>
+
+</body>
+</html>
+
 
 
