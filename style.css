@@ -169,3 +169,24 @@ footer {
   padding: 20px;
   background: #eee;
 }
+
+
+#course-search {
+  width: 100%;
+  padding: 10px;
+  margin: 12px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#courses-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#courses-table th,
+#courses-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
