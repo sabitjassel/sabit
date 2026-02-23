@@ -168,11 +168,11 @@
 <script defer>
   document.addEventListener("DOMContentLoaded", () => {
 
-    // (Module 4) Selecting by ID: getElementById()
+    // Selecting by ID
     const aboutSection = document.getElementById("about");
     console.log("About Section:", aboutSection);
 
-    // (Module 4) Selecting first h2: querySelector()
+    // Selecting first h2
     const firstHeading = document.querySelector("h2");
     console.log("First h2:", firstHeading);
 
@@ -180,7 +180,7 @@
     const skillsList = document.querySelector(".skills-list");
     console.log("Skills List:", skillsList);
 
-    // Selecting multiple elements: querySelectorAll()
+    // Selecting multiple elements
     const projectCards = document.querySelectorAll(".card");
     console.log("Project Cards:", projectCards);
 
@@ -198,39 +198,52 @@
       footerText.textContent = "© 2026 Jassel Sabit | Updated with JavaScript";
     }
 
-    // ===== MODULE 4: Working with JSON file (students.json) =====
-    const jsonURL = "https://sabitjassel.github.io/students.json";
+    // ===== JSON: Students =====
+    const jsonURL = "https://sabitjassel.github.io/sabit/student.json";
 
     fetch(jsonURL)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+        return response.json();
+      })
       .then(data => {
         const studentList = document.getElementById("student-list");
-        if (!studentList) return;
+        if (!studentList) {
+          console.warn("Missing element: #student-list (add <ul id='student-list'></ul> in HTML)");
+          return;
+        }
 
         studentList.innerHTML = "";
 
-        if (data.students && Array.isArray(data.students)) {
-          data.students.forEach(student => {
-            const li = document.createElement("li");
-            li.textContent = `${student.name} - ${student.age} (Course: ${student.course})`;
-            studentList.appendChild(li);
-          });
-        } else {
-          console.error("Expected 'students' array but got:", data);
+        // Support students OR student key (in case your JSON uses the wrong key)
+        const studentsArray =
+          (Array.isArray(data.students) && data.students) ||
+          (Array.isArray(data.student) && data.student) ||
+          null;
+
+        if (!studentsArray) {
+          console.error("Your student.json must contain { students: [ ... ] } (or { student: [ ... ] }). Got:", data);
+          return;
         }
+
+        studentsArray.forEach(student => {
+          const li = document.createElement("li");
+          li.textContent = `${student.name ?? "No name"} - ${student.age ?? "?"} (Course: ${student.course ?? "?"})`;
+          studentList.appendChild(li);
+        });
       })
-      .catch(error => console.error("Error fetching students.json:", error));
+      .catch(error => console.error("Error fetching student.json:", error));
 
-    // ==========================================================
-    // ✅ NEXT TASK: courses.json (Subjects Taken) + Search Bar
-    // ==========================================================
-
-    const coursesURL = "https://sabitjassel.github.io/courses.json"; // <-- make sure this file exists in your repo
+    // ===== JSON: Courses + Search =====
+    const coursesURL = "https://sabitjassel.github.io/sabit/courses.json"; // ✅ FIXED
     let allCourses = [];
 
     function renderCourses(courses) {
       const tbody = document.getElementById("courses-body");
-      if (!tbody) return;
+      if (!tbody) {
+        console.warn("Missing element: #courses-body (add <tbody id='courses-body'></tbody> in HTML)");
+        return;
+      }
 
       tbody.innerHTML = "";
 
@@ -248,34 +261,36 @@
     }
 
     fetch(coursesURL)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status} - ${res.statusText}`);
+        return res.json();
+      })
       .then(data => {
         if (data.courses && Array.isArray(data.courses)) {
           allCourses = data.courses;
           renderCourses(allCourses);
+          console.log("Courses loaded:", allCourses.length);
         } else {
-          console.error("Expected 'courses' array but got:", data);
+          console.error("Expected { courses: [ ... ] } but got:", data);
         }
       })
       .catch(err => console.error("Error fetching courses.json:", err));
 
-    // ✅ Search bar filtering (Skills Challenge)
+    // Search bar filtering
     const searchInput = document.getElementById("course-search");
     if (searchInput) {
       searchInput.addEventListener("input", () => {
         const q = searchInput.value.trim().toLowerCase();
-
         const filtered = allCourses.filter(c =>
           String(c.code || "").toLowerCase().includes(q) ||
           String(c.description || "").toLowerCase().includes(q)
         );
-
         renderCourses(filtered);
       });
+    } else {
+      console.warn("Missing element: #course-search (add <input id='course-search'> in HTML)");
     }
 
   });
 </script>
 
-</body>
-</html>
