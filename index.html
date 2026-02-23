@@ -198,41 +198,38 @@
       footerText.textContent = "© 2026 Jassel Sabit | Updated with JavaScript";
     }
 
-    // ===== JSON: Students =====
-    const jsonURL = "https://sabitjassel.github.io/sabit/student.json";
+// ===== JSON: Students =====
+const jsonURL = "https://sabitjassel.github.io/sabit/students.json";
 
-    fetch(jsonURL)
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText}`);
-        return response.json();
-      })
-      .then(data => {
-        const studentList = document.getElementById("student-list");
-        if (!studentList) {
-          console.warn("Missing element: #student-list (add <ul id='student-list'></ul> in HTML)");
-          return;
-        }
+fetch(jsonURL)
+  .then(response => {
+    if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+    return response.json();
+  })
+  .then(data => {
+    const studentList = document.getElementById("student-list");
+    if (!studentList) {
+      console.warn("Missing element: #student-list (add <ul id='student-list'></ul> in HTML)");
+      return;
+    }
 
-        studentList.innerHTML = "";
+    studentList.innerHTML = "";
 
-        // Support students OR student key (in case your JSON uses the wrong key)
-        const studentsArray =
-          (Array.isArray(data.students) && data.students) ||
-          (Array.isArray(data.student) && data.student) ||
-          null;
+    // Expect: { "students": [ ... ] }
+    const studentsArray = Array.isArray(data.students) ? data.students : null;
 
-        if (!studentsArray) {
-          console.error("Your student.json must contain { students: [ ... ] } (or { student: [ ... ] }). Got:", data);
-          return;
-        }
+    if (!studentsArray) {
+      console.error("Your students.json must contain { students: [ ... ] }. Got:", data);
+      return;
+    }
 
-        studentsArray.forEach(student => {
-          const li = document.createElement("li");
-          li.textContent = `${student.name ?? "No name"} - ${student.age ?? "?"} (Course: ${student.course ?? "?"})`;
-          studentList.appendChild(li);
-        });
-      })
-      .catch(error => console.error("Error fetching student.json:", error));
+    studentsArray.forEach(student => {
+      const li = document.createElement("li");
+      li.textContent = `${student.name ?? "No name"} - ${student.age ?? "?"} (Course: ${student.course ?? "?"})`;
+      studentList.appendChild(li);
+    });
+  })
+  .catch(error => console.error("Error fetching students.json:", error));
 
     // ===== JSON: Courses + Search =====
     const coursesURL = "https://sabitjassel.github.io/sabit/courses.json"; // ✅ FIXED
@@ -293,4 +290,5 @@
 
   });
 </script>
+
 
