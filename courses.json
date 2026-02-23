@@ -1,18 +1,120 @@
 {
   "courses": [
+
     {
-      "year_level": "1st",
-      "sem": "1st",
-      "code": "IT112",
-      "description": "Computer Programming 1",
-      "credit": "3.0"
+      "year_level": "1st Year",
+      "sem": "1st Sem",
+      "code": "IT111",
+      "description": "Introduction to Computing",
+      "credit": "3"
     },
     {
-      "year_level": "1st",
-      "sem": "2nd",
-      "code": "IT113",
+      "year_level": "1st Year",
+      "sem": "1st Sem",
+      "code": "IT112",
+      "description": "Computer Programming 1",
+      "credit": "3"
+    },
+    {
+      "year_level": "1st Year",
+      "sem": "1st Sem",
+      "code": "PurCom",
+      "description": "Purposive Communication",
+      "credit": "3"
+    },
+    {
+      "year_level": "1st Year",
+      "sem": "1st Sem",
+      "code": "PATH FIT 3",
+      "description": "Physical Activity Towards Health and Fitness 1",
+      "credit": "2"
+    },
+    {
+      "year_level": "1st Year",
+      "sem": "1st Sem",
+      "code": "EnviSci",
+      "description": "Environmental Science",
+      "credit": "3"
+    },
+
+    {
+      "year_level": "1st Year",
+      "sem": "2nd Sem",
+      "code": "IT121",
       "description": "Computer Programming 2",
-      "credit": "3.0"
+      "credit": "3"
+    },
+    {
+      "year_level": "1st Year",
+      "sem": "2nd Sem",
+      "code": "IT122",
+      "description": "Data Structures and Algorithms",
+      "credit": "3"
+    },
+    {
+      "year_level": "1st Year",
+      "sem": "2nd Sem",
+      "code": "IT123",
+      "description": "Discrete Mathematics",
+      "credit": "3"
+    },
+    {
+      "year_level": "1st Year",
+      "sem": "2nd Sem",
+      "code": "UTS",
+      "description": "Understanding the Self",
+      "credit": "3"
+    },
+    {
+      "year_level": "1st Year",
+      "sem": "2nd Sem",
+      "code": "Rizal",
+      "description": "Life and Works of Rizal",
+      "credit": "3"
+    },
+    {
+      "year_level": "1st Year",
+      "sem": "2nd Sem",
+      "code": "PATH FIT 4",
+      "description": "Physical Activity Towards Health and Fitness 2",
+      "credit": "2"
+    },
+
+    {
+      "year_level": "2nd Year",
+      "sem": "1st Sem",
+      "code": "IT211",
+      "description": "Introduction to Human Computer Interaction",
+      "credit": "3"
+    },
+    {
+      "year_level": "2nd Year",
+      "sem": "1st Sem",
+      "code": "IT212",
+      "description": "Fundamentals of Database Systems",
+      "credit": "3"
+    },
+    {
+      "year_level": "2nd Year",
+      "sem": "1st Sem",
+      "code": "IT213",
+      "description": "Platform Technologies",
+      "credit": "3"
+    },
+    {
+      "year_level": "2nd Year",
+      "sem": "1st Sem",
+      "code": "IT214",
+      "description": "Object Oriented Programming",
+      "credit": "3"
+    },
+    {
+      "year_level": "2nd Year",
+      "sem": "1st Sem",
+      "code": "IT215",
+      "description": "Accounting Principles",
+      "credit": "3"
     }
+
   ]
 }
