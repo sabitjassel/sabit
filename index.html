@@ -8,72 +8,169 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 40px;
+      margin: 0;
+      background: #f4f6f9;
+      color: #222;
     }
 
-    h2 {
-      margin-top: 30px;
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      color: #666;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 18px 18px 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+
+    /* Student list */
+    #student-list {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.9;
+    }
+
+    /* Search */
+    .search-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
     }
 
     .search-input {
-      width: 100%;
-      max-width: 600px;
-      padding: 10px;
-      margin: 10px 0 15px;
-      border: 1px solid #aaa;
-      border-radius: 6px;
+      flex: 1;
+      min-width: 240px;
+      max-width: 700px;
+      padding: 10px 12px;
+      border: 1px solid #cfcfcf;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: #777;
+    }
+
+    /* Table */
+    .table-wrap {
+      overflow-x: auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 14px;
+      background: #fff;
     }
 
     th, td {
-      border: 1px solid #888;
-      padding: 8px;
+      border: 1px solid #ddd;
+      padding: 10px;
       text-align: left;
+      vertical-align: top;
     }
 
-    thead {
-      background-color: #f2f2f2;
+    thead th {
+      background: #eef2f7;
+      font-weight: bold;
+    }
+
+    tbody tr:hover {
+      background: #f7f9fc;
+    }
+
+    /* Responsive spacing */
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      /* Put Subjects wider on desktop if you want */
+      .subjects-card {
+        grid-column: span 2;
+      }
     }
   </style>
 </head>
 
 <body>
+  <div class="container">
 
-  <!-- STUDENT LIST -->
-  <section id="students">
-    <h2>Student List</h2>
-    <ul id="student-list"></ul>
-  </section>
+    <header>
+      <h1>Student Information</h1>
+      <p>Student List and Subjects Taken (with Search)</p>
+    </header>
 
-  <!-- SUBJECTS TAKEN -->
-  <section id="subjects">
-    <h2>Subjects Taken</h2>
+    <main class="grid">
 
-    <input
-      type="text"
-      id="course-search"
-      class="search-input"
-      placeholder="Search subject (e.g., programming, discrete, web system)..."
-    >
+      <!-- STUDENT LIST -->
+      <section id="students" class="card">
+        <h2>Student List</h2>
+        <ul id="student-list"></ul>
+      </section>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Year</th>
-          <th>Sem</th>
-          <th>Code</th>
-          <th>Description</th>
-          <th>Credit</th>
-        </tr>
-      </thead>
-      <tbody id="courses-body"></tbody>
-    </table>
-  </section>
+      <!-- SUBJECTS TAKEN -->
+      <section id="subjects" class="card subjects-card">
+        <h2>Subjects Taken</h2>
+
+        <div class="search-row">
+          <input
+            type="text"
+            id="course-search"
+            class="search-input"
+            placeholder="Search subject (e.g., programming, discrete, web system)..."
+            aria-label="Search subjects"
+          >
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Sem</th>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Credit</th>
+              </tr>
+            </thead>
+            <tbody id="courses-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -83,14 +180,19 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(res => res.json())
     .then(data => {
       const list = document.getElementById("student-list");
-      if (data.students) {
+      list.innerHTML = "";
+
+      if (Array.isArray(data.students)) {
         data.students.forEach(student => {
           const li = document.createElement("li");
           li.textContent = `${student.name} - ${student.age} (Course: ${student.course})`;
           list.appendChild(li);
         });
+      } else {
+        console.error("students.json must contain { students: [ ... ] }");
       }
-    });
+    })
+    .catch(err => console.error("Error loading students.json:", err));
 
   // ===== COURSES =====
   let allCourses = [];
@@ -102,11 +204,11 @@ document.addEventListener("DOMContentLoaded", () => {
     courses.forEach(course => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${course.year_level}</td>
-        <td>${course.sem}</td>
-        <td>${course.code}</td>
-        <td>${course.description}</td>
-        <td>${course.credit}</td>
+        <td>${course.year_level ?? ""}</td>
+        <td>${course.sem ?? ""}</td>
+        <td>${course.code ?? ""}</td>
+        <td>${course.description ?? ""}</td>
+        <td>${course.credit ?? ""}</td>
       `;
       tbody.appendChild(tr);
     });
@@ -115,30 +217,30 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("https://sabitjassel.github.io/sabit/courses.json")
     .then(res => res.json())
     .then(data => {
-      if (data.courses) {
+      if (Array.isArray(data.courses)) {
         allCourses = data.courses;
         renderCourses(allCourses);
+      } else {
+        console.error("courses.json must contain { courses: [ ... ] }");
       }
-    });
+    })
+    .catch(err => console.error("Error loading courses.json:", err));
 
-  // ===== SEARCH =====
-  document.getElementById("course-search")
-    .addEventListener("input", function () {
-      const query = this.value.toLowerCase();
+  // ===== SEARCH (dynamic) =====
+  const searchBox = document.getElementById("course-search");
+  searchBox.addEventListener("input", () => {
+    const query = searchBox.value.trim().toLowerCase();
 
-      const filtered = allCourses.filter(course =>
-        course.code.toLowerCase().includes(query) ||
-        course.description.toLowerCase().includes(query)
-      );
+    const filtered = allCourses.filter(course =>
+      String(course.description || "").toLowerCase().includes(query) ||
+      String(course.code || "").toLowerCase().includes(query)
+    );
 
-      renderCourses(filtered);
-    });
+    renderCourses(filtered);
+  });
 
 });
 </script>
 
 </body>
 </html>
-
-
-
