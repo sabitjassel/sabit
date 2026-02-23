@@ -1,0 +1,171 @@
+/* ========================
+   GLOBAL
+======================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  background-color: #f9f9f9;
+}
+
+/* ========================
+   NAVIGATION
+======================== */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: #4f4d4e;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.nav-menu li {
+  margin: 0 15px;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: white;
+  padding: 5px 10px;
+}
+
+.nav-menu a:hover {
+  background: #444;
+}
+
+.nav-menu a:focus {
+  outline: 2px solid yellow;
+}
+
+.nav-menu a:active {
+  color: red;
+}
+
+/* ========================
+   LAYOUT
+======================== */
+.container {
+  max-width: 1000px;
+  margin: 100px auto 40px auto;
+  padding: 20px;
+}
+
+/* ========================
+   SECTIONS
+======================== */
+section {
+  margin-bottom: 50px;
+}
+
+section h2 {
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+}
+
+/* ID selector example */
+#about {
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+/* Descendant selector */
+#skills ul li {
+  margin: 8px 0;
+}
+
+/* ========================
+   FIGURE
+======================== */
+figure img {
+  width: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+/* ========================
+   PROJECT CARDS
+======================== */
+.project-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-width: 250px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin: 10px 0;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* ========================
+   SKILLS
+======================== */
+.skills-list {
+  padding-left: 20px;
+}
+
+/* relative unit example */
+.em-text {
+  font-size: 1.2em;
+}
+
+/* ========================
+   FORM
+======================== */
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+}
+
+input, textarea {
+  margin: 8px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+input:focus, textarea:focus {
+  border: 2px solid blue;
+}
+
+button {
+  padding: 10px;
+  background: #222;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: black;
+}
+
+/* ========================
+   FOOTER
+======================== */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #eee;
+}

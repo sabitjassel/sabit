@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jassel Sabit | Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-container">
+    <div class="logo">
+      <h1>Jassel Sabit</h1>
+    </div>
+
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About Me</h2>
+
+    <figure>
+      <img src="resume.jpg" alt="Portrait of Jassel Sabit">
+      <figcaption>Jassel Sabit – Information Technology Student</figcaption>
+    </figure>
+
+    <p>
+      I am a motivated Information Technology student seeking opportunities to apply my skills and
+      gain experience in a professional environment. I enjoy building responsive websites and
+      continuously improving my technical and problem-solving abilities.
+    </p>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <h2>Education</h2>
+
+    <ol>
+      <li>
+        <h3>Capitol University</h3>
+        <p>STEM Strand (2021 – 2023)</p>
+      </li>
+
+      <li>
+        <h3>University of Science and Technology of Southern Philippines</h3>
+        <p>BS in Information Technology (2025 – 2026)</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2>Skills</h2>
+
+    <ul class="skills-list">
+      <li>Microsoft Office & Google Suite</li>
+      <li>Basic HTML5 & CSS3</li>
+      <li>Time Management</li>
+      <li>Adaptability and Willingness to Learn</li>
+    </ul>
+
+    <p class="note">This text uses <span class="em-text">relative em sizing</span>.</p>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <div class="project-container">
+
+      <article class="card">
+        <h3>Portfolio Website</h3>
+        <p>Built using semantic HTML5 and styled with advanced CSS layout techniques.</p>
+      </article>
+
+      <article class="card">
+        <h3>Responsive Layout Design</h3>
+        <p>Created responsive web layouts using Flexbox and proper box model principles.</p>
+      </article>
+
+      <article class="card">
+        <h3>Contact Form Design</h3>
+        <p>Designed and styled a functional contact form with validation and hover effects.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+
+    <form>
+      <label for="name">Name</label>
+      <input type="text" id="name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" rows="5" required></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Jassel Sabit</p>
+</footer>
+
+<!-- ========================= -->
+<!-- JAVASCRIPT SECTION BELOW -->
+<!-- ========================= -->
+
+<script>
+  // Selecting by ID
+  const aboutSection = document.getElementById("about");
+  console.log("About Section:", aboutSection);
+
+  // Selecting first h2
+  const firstHeading = document.querySelector("h2");
+  console.log("First h2:", firstHeading);
+
+  // Selecting by class
+  const skillsList = document.querySelector(".skills-list");
+  console.log("Skills List:", skillsList);
+
+  // Selecting multiple elements
+  const projectCards = document.querySelectorAll(".card");
+  console.log("Project Cards:", projectCards);
+
+  // ===== Visual Proof (DOM Manipulation) =====
+
+  // Change About title color
+  const aboutTitle = document.querySelector("#about h2");
+  aboutTitle.style.color = "blue";
+
+  // Add border to project cards
+  projectCards.forEach(card => {
+    card.style.border = "2px solid red";
+    card.style.padding = "10px";
+  });
+
+  // Change footer text dynamically
+  const footerText = document.querySelector("footer p");
+  footerText.textContent = "© 2026 Jassel Sabit | Updated with JavaScript";
+</script>
+
+</body>
+</html>
