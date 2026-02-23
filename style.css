@@ -1,56 +1,156 @@
+/* =========================
+   CCS PORTAL THEME (BLUE)
+   ========================= */
+
 /* ===== GENERAL ===== */
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
-  margin: 40px;
-  background-color: #f5f7fa;
-  color: #333;
+  background: #eef3f9;
+  color: #1f2937;
 }
 
-h2 {
-  margin-top: 30px;
-  margin-bottom: 10px;
+/* Layout wrapper used in your HTML */
+.container {
+  max-width: 1000px;
+  margin: 28px auto;
+  padding: 0 16px;
+}
+
+/* Header (CCS-like portal banner) */
+header {
+  background: #0d3b66;              /* CCS blue */
+  color: #fff;
+  border-radius: 10px;
+  padding: 18px 16px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  margin-bottom: 18px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: 0.3px;
+}
+
+header p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* Grid & cards */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 5px 16px rgba(0,0,0,0.08);
+  border: 1px solid #dbe5f1;
+}
+
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: #0d3b66;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #0d3b66;
 }
 
 /* ===== STUDENT LIST ===== */
 #student-list {
-  padding-left: 20px;
-  line-height: 1.8;
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.9;
+}
+
+#student-list li {
+  margin: 4px 0;
 }
 
 /* ===== SEARCH BAR ===== */
-#course-search {
+.search-row {
+  margin: 10px 0 12px;
+}
+
+#course-search,
+.search-input {
   width: 100%;
-  max-width: 600px;
-  padding: 10px 12px;
-  margin: 10px 0 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  max-width: 700px;
+  padding: 11px 12px;
+  border: 1px solid #c7d2e2;
+  border-radius: 8px;
   font-size: 14px;
+  outline: none;
+  background: #f8fbff;
+}
+
+#course-search:focus,
+.search-input:focus {
+  border-color: #0d3b66;
+  box-shadow: 0 0 0 3px rgba(13, 59, 102, 0.15);
 }
 
 /* ===== TABLE ===== */
+.table-wrap {
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+/* Works for both: <table> or <table id="courses-table"> */
+table,
 #courses-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
+  background: #fff;
+  font-size: 14px;
 }
 
-#courses-table th,
-#courses-table td {
-  border: 1px solid #ccc;
-  padding: 8px 10px;
+/* CCS header row */
+thead th,
+#courses-table thead th {
+  background: #0d3b66;
+  color: #fff;
+  padding: 10px;
   text-align: left;
+  font-weight: bold;
+  border: 1px solid #0b3156;
 }
 
-#courses-table thead {
-  background-color: #e9ecef;
+/* Cells */
+tbody td,
+#courses-table tbody td {
+  border: 1px solid #d7e0ee;
+  padding: 9px 10px;
+  vertical-align: top;
 }
 
+/* Alternate rows */
+tbody tr:nth-child(even),
+#courses-table tbody tr:nth-child(even) {
+  background: #f6f9ff;
+}
+
+/* Hover highlight like portal tables */
+tbody tr:hover,
 #courses-table tbody tr:hover {
-  background-color: #f1f3f5;
+  background: #e3f0ff;
 }
 
-/* ===== SECTION SPACING ===== */
-section {
-  margin-bottom: 40px;
+/* Responsive: 2 columns on wide screens */
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .subjects-card {
+    grid-column: span 2;
+  }
 }
+
