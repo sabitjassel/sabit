@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jassel Sabit | Portfolio</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Optional (Module 4 - Hello World alert in head) -->
+  <!-- You can enable this if your instructor requires the alert exercise -->
+  <!--
+  <script>
+    alert("Hello World! I am an alert box.");
+  </script>
+  -->
 </head>
 
 <body>
@@ -81,7 +89,6 @@
     <h2>Projects</h2>
 
     <div class="project-container">
-
       <article class="card">
         <h3>Portfolio Website</h3>
         <p>Built using semantic HTML5 and styled with advanced CSS layout techniques.</p>
@@ -96,8 +103,14 @@
         <h3>Contact Form Design</h3>
         <p>Designed and styled a functional contact form with validation and hover effects.</p>
       </article>
-
     </div>
+  </section>
+
+  <!-- ✅ MODULE 4: Working with JSON file (Student List placeholder) -->
+  <!-- Required by the exercise on page 28 -->
+  <section id="students">
+    <h2>Student List</h2>
+    <ul id="student-list" class="card-body"></ul>
   </section>
 
   <!-- CONTACT -->
@@ -127,40 +140,67 @@
 <!-- ========================= -->
 <!-- JAVASCRIPT SECTION BELOW -->
 <!-- ========================= -->
+<script defer>
+  document.addEventListener("DOMContentLoaded", () => {
 
-<script>
-  // Selecting by ID
-  const aboutSection = document.getElementById("about");
-  console.log("About Section:", aboutSection);
+    // (Module 4) Selecting by ID: getElementById() :contentReference[oaicite:4]{index=4}
+    const aboutSection = document.getElementById("about");
+    console.log("About Section:", aboutSection);
 
-  // Selecting first h2
-  const firstHeading = document.querySelector("h2");
-  console.log("First h2:", firstHeading);
+    // (Module 4) Selecting first h2: querySelector() :contentReference[oaicite:5]{index=5}
+    const firstHeading = document.querySelector("h2");
+    console.log("First h2:", firstHeading);
 
-  // Selecting by class
-  const skillsList = document.querySelector(".skills-list");
-  console.log("Skills List:", skillsList);
+    // Selecting by class
+    const skillsList = document.querySelector(".skills-list");
+    console.log("Skills List:", skillsList);
 
-  // Selecting multiple elements
-  const projectCards = document.querySelectorAll(".card");
-  console.log("Project Cards:", projectCards);
+    // Selecting multiple elements: querySelectorAll() :contentReference[oaicite:6]{index=6}
+    const projectCards = document.querySelectorAll(".card");
+    console.log("Project Cards:", projectCards);
 
-  // ===== Visual Proof (DOM Manipulation) =====
+    // ===== Visual Proof (DOM Manipulation) =====
+    const aboutTitle = document.querySelector("#about h2");
+    if (aboutTitle) aboutTitle.style.color = "blue";
 
-  // Change About title color
-  const aboutTitle = document.querySelector("#about h2");
-  aboutTitle.style.color = "blue";
+    projectCards.forEach(card => {
+      card.style.border = "2px solid red";
+      card.style.padding = "10px";
+    });
 
-  // Add border to project cards
-  projectCards.forEach(card => {
-    card.style.border = "2px solid red";
-    card.style.padding = "10px";
+    const footerText = document.querySelector("footer p");
+    if (footerText) {
+      footerText.textContent = "© 2026 Jassel Sabit | Updated with JavaScript";
+    }
+
+    // ===== MODULE 4: Working with JSON file (students.json) =====
+    // Exercise reference: page 28 :contentReference[oaicite:7]{index=7}
+    const jsonURL = "https://sabitjassel.github.io/students.json"; // 
+
+    fetch(jsonURL)
+      .then(response => response.json())
+      .then(data => {
+        const studentList = document.getElementById("student-list");
+        if (!studentList) return;
+
+        // Clear old content (in case you reload)
+        studentList.innerHTML = "";
+
+        if (data.students && Array.isArray(data.students)) {
+          data.students.forEach(student => {
+            const li = document.createElement("li");
+            li.textContent = `${student.name} - ${student.age} (Course: ${student.course})`;
+            studentList.appendChild(li);
+          });
+        } else {
+          console.error("Expected 'students' array but got:", data);
+        }
+      })
+      .catch(error => console.error("Error fetching JSON:", error));
+
   });
-
-  // Change footer text dynamically
-  const footerText = document.querySelector("footer p");
-  footerText.textContent = "© 2026 Jassel Sabit | Updated with JavaScript";
 </script>
 
 </body>
 </html>
+
