@@ -85,6 +85,31 @@
   </section>
 
   <!-- PROJECTS -->
+  <section id="subjects">
+  <h2>Subjects Taken</h2>
+
+  <!-- Search bar (Skills Challenge) -->
+  <input
+    type="text"
+    id="course-search"
+    placeholder="Search by code or description..."
+    aria-label="Search courses"
+  >
+
+  <table id="courses-table">
+    <thead>
+      <tr>
+        <th>Year Level</th>
+        <th>Semester</th>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Credit</th>
+      </tr>
+    </thead>
+    <tbody id="courses-body"></tbody>
+  </table>
+</section> 
+  
   <section id="projects">
     <h2>Projects</h2>
 
@@ -143,11 +168,11 @@
 <script defer>
   document.addEventListener("DOMContentLoaded", () => {
 
-    // (Module 4) Selecting by ID: getElementById() :contentReference[oaicite:4]{index=4}
+    // (Module 4) Selecting by ID: getElementById()
     const aboutSection = document.getElementById("about");
     console.log("About Section:", aboutSection);
 
-    // (Module 4) Selecting first h2: querySelector() :contentReference[oaicite:5]{index=5}
+    // (Module 4) Selecting first h2: querySelector()
     const firstHeading = document.querySelector("h2");
     console.log("First h2:", firstHeading);
 
@@ -155,7 +180,7 @@
     const skillsList = document.querySelector(".skills-list");
     console.log("Skills List:", skillsList);
 
-    // Selecting multiple elements: querySelectorAll() :contentReference[oaicite:6]{index=6}
+    // Selecting multiple elements: querySelectorAll()
     const projectCards = document.querySelectorAll(".card");
     console.log("Project Cards:", projectCards);
 
@@ -174,8 +199,7 @@
     }
 
     // ===== MODULE 4: Working with JSON file (students.json) =====
-    // Exercise reference: page 28 :contentReference[oaicite:7]{index=7}
-    const jsonURL = "https://sabitjassel.github.io/students.json"; // 
+    const jsonURL = "https://sabitjassel.github.io/students.json";
 
     fetch(jsonURL)
       .then(response => response.json())
@@ -183,7 +207,6 @@
         const studentList = document.getElementById("student-list");
         if (!studentList) return;
 
-        // Clear old content (in case you reload)
         studentList.innerHTML = "";
 
         if (data.students && Array.isArray(data.students)) {
@@ -196,11 +219,63 @@
           console.error("Expected 'students' array but got:", data);
         }
       })
-      .catch(error => console.error("Error fetching JSON:", error));
+      .catch(error => console.error("Error fetching students.json:", error));
+
+    // ==========================================================
+    // ✅ NEXT TASK: courses.json (Subjects Taken) + Search Bar
+    // ==========================================================
+
+    const coursesURL = "https://sabitjassel.github.io/courses.json"; // <-- make sure this file exists in your repo
+    let allCourses = [];
+
+    function renderCourses(courses) {
+      const tbody = document.getElementById("courses-body");
+      if (!tbody) return;
+
+      tbody.innerHTML = "";
+
+      courses.forEach(course => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${course.year_level ?? ""}</td>
+          <td>${course.sem ?? ""}</td>
+          <td>${course.code ?? ""}</td>
+          <td>${course.description ?? ""}</td>
+          <td>${course.credit ?? ""}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    fetch(coursesURL)
+      .then(res => res.json())
+      .then(data => {
+        if (data.courses && Array.isArray(data.courses)) {
+          allCourses = data.courses;
+          renderCourses(allCourses);
+        } else {
+          console.error("Expected 'courses' array but got:", data);
+        }
+      })
+      .catch(err => console.error("Error fetching courses.json:", err));
+
+    // ✅ Search bar filtering (Skills Challenge)
+    const searchInput = document.getElementById("course-search");
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        const q = searchInput.value.trim().toLowerCase();
+
+        const filtered = allCourses.filter(c =>
+          String(c.code || "").toLowerCase().includes(q) ||
+          String(c.description || "").toLowerCase().includes(q)
+        );
+
+        renderCourses(filtered);
+      });
+    }
 
   });
 </script>
 
 </body>
 </html>
-
